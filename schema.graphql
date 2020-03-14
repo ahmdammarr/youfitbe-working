@@ -1,0 +1,73 @@
+scalar DateTime
+
+type Query {
+  #users
+  users: [User!]!
+  countUser(firstName: String): String
+  admins: [Admin!]!
+  me: User
+  posts: [Link!]!
+}
+
+type Mutation {
+  #Users
+  signup(
+    firstName: String!
+    lasttName: String!
+    email: String!
+    password: String!
+    mobileOne: String!
+    mobileTwo: String
+    City: String!
+    address: String!
+  ): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  updateUser(
+    firstName: String
+    lasttName: String
+    email: String
+    password: String
+    mobileOne: String
+    mobileTwo: String
+    City: String
+    address: String
+  ): User
+  signupAdmin(email: String!, password: String!, name: String!): AuthPayload
+  acceptAdmin(id: ID!): Admin!
+  loginAdmin(email: String!, password: String!): AuthPayload
+  post(description: String!, url: String!): Link!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  mobileOne: String!
+  mobileTwo: String
+  City: String!
+  address: String!
+  quantity: Int!
+  links: [Link!]
+}
+
+type Admin {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  accepted: Boolean!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+  admin: Admin
+}
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+  postedBy: User
+}

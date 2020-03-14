@@ -3,7 +3,164 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type Admin {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  accepted: Boolean!
+}
+
+type AdminConnection {
+  pageInfo: PageInfo!
+  edges: [AdminEdge]!
+  aggregate: AggregateAdmin!
+}
+
+input AdminCreateInput {
+  id: ID
+  email: String
+  name: String!
+  password: String!
+  accepted: Boolean
+}
+
+type AdminEdge {
+  node: Admin!
+  cursor: String!
+}
+
+enum AdminOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
+  accepted_ASC
+  accepted_DESC
+}
+
+type AdminPreviousValues {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  accepted: Boolean!
+}
+
+type AdminSubscriptionPayload {
+  mutation: MutationType!
+  node: Admin
+  updatedFields: [String!]
+  previousValues: AdminPreviousValues
+}
+
+input AdminSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AdminWhereInput
+  AND: [AdminSubscriptionWhereInput!]
+  OR: [AdminSubscriptionWhereInput!]
+  NOT: [AdminSubscriptionWhereInput!]
+}
+
+input AdminUpdateInput {
+  email: String
+  name: String
+  password: String
+  accepted: Boolean
+}
+
+input AdminUpdateManyMutationInput {
+  email: String
+  name: String
+  password: String
+  accepted: Boolean
+}
+
+input AdminWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  accepted: Boolean
+  accepted_not: Boolean
+  AND: [AdminWhereInput!]
+  OR: [AdminWhereInput!]
+  NOT: [AdminWhereInput!]
+}
+
+input AdminWhereUniqueInput {
+  id: ID
+  email: String
+}
+
+type AggregateAdmin {
+  count: Int!
+}
+
+type AggregateLink {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -11,9 +168,262 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
+type Link {
+  id: ID!
+  createdAt: DateTime!
+  description: String!
+  url: String!
+  postedBy: User
+}
+
+type LinkConnection {
+  pageInfo: PageInfo!
+  edges: [LinkEdge]!
+  aggregate: AggregateLink!
+}
+
+input LinkCreateInput {
+  id: ID
+  description: String!
+  url: String!
+  postedBy: UserCreateOneWithoutLinksInput
+}
+
+input LinkCreateManyWithoutPostedByInput {
+  create: [LinkCreateWithoutPostedByInput!]
+  connect: [LinkWhereUniqueInput!]
+}
+
+input LinkCreateWithoutPostedByInput {
+  id: ID
+  description: String!
+  url: String!
+}
+
+type LinkEdge {
+  node: Link!
+  cursor: String!
+}
+
+enum LinkOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+}
+
+type LinkPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  description: String!
+  url: String!
+}
+
+input LinkScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  AND: [LinkScalarWhereInput!]
+  OR: [LinkScalarWhereInput!]
+  NOT: [LinkScalarWhereInput!]
+}
+
+type LinkSubscriptionPayload {
+  mutation: MutationType!
+  node: Link
+  updatedFields: [String!]
+  previousValues: LinkPreviousValues
+}
+
+input LinkSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LinkWhereInput
+  AND: [LinkSubscriptionWhereInput!]
+  OR: [LinkSubscriptionWhereInput!]
+  NOT: [LinkSubscriptionWhereInput!]
+}
+
+input LinkUpdateInput {
+  description: String
+  url: String
+  postedBy: UserUpdateOneWithoutLinksInput
+}
+
+input LinkUpdateManyDataInput {
+  description: String
+  url: String
+}
+
+input LinkUpdateManyMutationInput {
+  description: String
+  url: String
+}
+
+input LinkUpdateManyWithoutPostedByInput {
+  create: [LinkCreateWithoutPostedByInput!]
+  delete: [LinkWhereUniqueInput!]
+  connect: [LinkWhereUniqueInput!]
+  set: [LinkWhereUniqueInput!]
+  disconnect: [LinkWhereUniqueInput!]
+  update: [LinkUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [LinkUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [LinkScalarWhereInput!]
+  updateMany: [LinkUpdateManyWithWhereNestedInput!]
+}
+
+input LinkUpdateManyWithWhereNestedInput {
+  where: LinkScalarWhereInput!
+  data: LinkUpdateManyDataInput!
+}
+
+input LinkUpdateWithoutPostedByDataInput {
+  description: String
+  url: String
+}
+
+input LinkUpdateWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput!
+  data: LinkUpdateWithoutPostedByDataInput!
+}
+
+input LinkUpsertWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput!
+  update: LinkUpdateWithoutPostedByDataInput!
+  create: LinkCreateWithoutPostedByInput!
+}
+
+input LinkWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  postedBy: UserWhereInput
+  AND: [LinkWhereInput!]
+  OR: [LinkWhereInput!]
+  NOT: [LinkWhereInput!]
+}
+
+input LinkWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Mutation {
+  createAdmin(data: AdminCreateInput!): Admin!
+  updateAdmin(data: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin
+  updateManyAdmins(data: AdminUpdateManyMutationInput!, where: AdminWhereInput): BatchPayload!
+  upsertAdmin(where: AdminWhereUniqueInput!, create: AdminCreateInput!, update: AdminUpdateInput!): Admin!
+  deleteAdmin(where: AdminWhereUniqueInput!): Admin
+  deleteManyAdmins(where: AdminWhereInput): BatchPayload!
+  createLink(data: LinkCreateInput!): Link!
+  updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
+  updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
+  upsertLink(where: LinkWhereUniqueInput!, create: LinkCreateInput!, update: LinkUpdateInput!): Link!
+  deleteLink(where: LinkWhereUniqueInput!): Link
+  deleteManyLinks(where: LinkWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -40,6 +450,12 @@ type PageInfo {
 }
 
 type Query {
+  admin(where: AdminWhereUniqueInput!): Admin
+  admins(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Admin]!
+  adminsConnection(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdminConnection!
+  link(where: LinkWhereUniqueInput!): Link
+  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
+  linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -47,12 +463,22 @@ type Query {
 }
 
 type Subscription {
+  admin(where: AdminSubscriptionWhereInput): AdminSubscriptionPayload
+  link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
-  name: String!
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  mobileOne: String!
+  mobileTwo: String
+  City: String!
+  address: String!
+  links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
 }
 
 type UserConnection {
@@ -63,7 +489,32 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  name: String!
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  mobileOne: String!
+  mobileTwo: String
+  City: String!
+  address: String!
+  links: LinkCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneWithoutLinksInput {
+  create: UserCreateWithoutLinksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutLinksInput {
+  id: ID
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  mobileOne: String!
+  mobileTwo: String
+  City: String!
+  address: String!
 }
 
 type UserEdge {
@@ -74,13 +525,34 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
+  firstName_ASC
+  firstName_DESC
+  lasttName_ASC
+  lasttName_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  mobileOne_ASC
+  mobileOne_DESC
+  mobileTwo_ASC
+  mobileTwo_DESC
+  City_ASC
+  City_DESC
+  address_ASC
+  address_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  name: String!
+  firstName: String!
+  lasttName: String!
+  email: String!
+  password: String!
+  mobileOne: String!
+  mobileTwo: String
+  City: String!
+  address: String!
 }
 
 type UserSubscriptionPayload {
@@ -102,11 +574,51 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  name: String
+  firstName: String
+  lasttName: String
+  email: String
+  password: String
+  mobileOne: String
+  mobileTwo: String
+  City: String
+  address: String
+  links: LinkUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
-  name: String
+  firstName: String
+  lasttName: String
+  email: String
+  password: String
+  mobileOne: String
+  mobileTwo: String
+  City: String
+  address: String
+}
+
+input UserUpdateOneWithoutLinksInput {
+  create: UserCreateWithoutLinksInput
+  update: UserUpdateWithoutLinksDataInput
+  upsert: UserUpsertWithoutLinksInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutLinksDataInput {
+  firstName: String
+  lasttName: String
+  email: String
+  password: String
+  mobileOne: String
+  mobileTwo: String
+  City: String
+  address: String
+}
+
+input UserUpsertWithoutLinksInput {
+  update: UserUpdateWithoutLinksDataInput!
+  create: UserCreateWithoutLinksInput!
 }
 
 input UserWhereInput {
@@ -124,20 +636,121 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lasttName: String
+  lasttName_not: String
+  lasttName_in: [String!]
+  lasttName_not_in: [String!]
+  lasttName_lt: String
+  lasttName_lte: String
+  lasttName_gt: String
+  lasttName_gte: String
+  lasttName_contains: String
+  lasttName_not_contains: String
+  lasttName_starts_with: String
+  lasttName_not_starts_with: String
+  lasttName_ends_with: String
+  lasttName_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  mobileOne: String
+  mobileOne_not: String
+  mobileOne_in: [String!]
+  mobileOne_not_in: [String!]
+  mobileOne_lt: String
+  mobileOne_lte: String
+  mobileOne_gt: String
+  mobileOne_gte: String
+  mobileOne_contains: String
+  mobileOne_not_contains: String
+  mobileOne_starts_with: String
+  mobileOne_not_starts_with: String
+  mobileOne_ends_with: String
+  mobileOne_not_ends_with: String
+  mobileTwo: String
+  mobileTwo_not: String
+  mobileTwo_in: [String!]
+  mobileTwo_not_in: [String!]
+  mobileTwo_lt: String
+  mobileTwo_lte: String
+  mobileTwo_gt: String
+  mobileTwo_gte: String
+  mobileTwo_contains: String
+  mobileTwo_not_contains: String
+  mobileTwo_starts_with: String
+  mobileTwo_not_starts_with: String
+  mobileTwo_ends_with: String
+  mobileTwo_not_ends_with: String
+  City: String
+  City_not: String
+  City_in: [String!]
+  City_not_in: [String!]
+  City_lt: String
+  City_lte: String
+  City_gt: String
+  City_gte: String
+  City_contains: String
+  City_not_contains: String
+  City_starts_with: String
+  City_not_starts_with: String
+  City_ends_with: String
+  City_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  links_every: LinkWhereInput
+  links_some: LinkWhereInput
+  links_none: LinkWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -145,6 +758,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
       }
